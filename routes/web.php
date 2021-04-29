@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/tesadmin', [HomeController::class, 'tesadmin']);
+    });
+    Route::get('/logout', function() {
+        Auth::logout();
+        redirect('/');
+    });
+    //route ketika page tidak sesuai hak akses, request dari middleware
+    Route::get('/denied', [HomeController::class, 'denied']);
+});
