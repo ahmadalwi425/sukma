@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SuratKeluar;
 
-class suratKeluarController extends Controller
+class SuratKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class suratKeluarController extends Controller
      */
     public function index()
     {
-        //
+        $suratkeluar = SuratKeluar::with('kategori','userterima','userkirim')->paginate(5);
+        // $paginate = Student::orderBy('id_student', 'asc');
+        return view('surat.index', ['suratkeluar' => $suratkeluar]);
     }
 
     /**
@@ -80,5 +83,35 @@ class suratKeluarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function terima_tu($id)
+    {
+        $data = SuratKeluar::find($id);
+        $data->stat_tu = 'diterima';
+        $data->save();
+        return redirect()->route('suratkeluar.index');
+    }
+    public function tolak_tu($id)
+    {
+        $data = SuratKeluar::find($id);
+        $data->stat_tu = 'ditolak';
+        $data->save();
+        return redirect()->route('suratkeluar.index');
+    }
+    public function terima_ketua($id)
+    {
+        $data = SuratKeluar::find($id);
+        $data->stat_prof = 'diterima';
+        $data->save();
+        
+        return redirect()->route('suratkeluar.index');
+    }
+    public function tolak_ketua($id)
+    {
+        $data = SuratKeluar::find($id);
+        $data->stat_prof = 'ditolak';
+        $data->save();
+        return redirect()->route('suratkeluar.index');
     }
 }

@@ -15,6 +15,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <a class="btn btn-success" href="{{ route('suratkeluar.index') }}"> Go to surat</a>
                 </div>
             </div>
         </div>

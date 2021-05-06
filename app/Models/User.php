@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\SuratKeluar;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function SuratKeluar(){
+        return $this->belongsTo(SuratKeluar::class, 'id');
+    }
     protected $fillable = [
         'username',
         'name',

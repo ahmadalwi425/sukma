@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Kategori;
 use App\Models\User;
-use App\Models\kategori;
 
 class SuratKeluar extends Model
 {
@@ -24,4 +24,14 @@ class SuratKeluar extends Model
         'stat_prof',
         'ttd'
         ];
+
+    public function kategori(){
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
+    public function userterima(){
+        return $this->belongsTo(User::class, 'id_tujuan');
+    }
+    public function userkirim(){
+        return $this->belongsTo(User::class, 'id_pengirim');
+    }
 }
