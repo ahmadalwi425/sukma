@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <table class="table table-striped">
                 <tr>
                     <th>No.</th>
@@ -13,6 +13,7 @@
                     <th>Judul</th>
                     <th>Status TU</th>
                     <th>Status Ketua</th>
+                    <th>Preview</th>
                 </tr>
                 @foreach ($suratkeluar as $data)
                 <tr>
@@ -38,8 +39,10 @@
                         @elseif($data->stat_tu == 'diterima')
                             <td><a class="btn btn-primary" disable="true">Diterima</a></td>
                         @endif
-                        ||
-                        @if($data->stat_prof == 'menunggu')
+                        
+                        @if($data->stat_tu == 'ditolak')
+                            <td><a class="btn btn-danger" disable="true">Ditolak TU</a></td>
+                        @elseif($data->stat_prof == 'menunggu')
                             <td><a class="btn btn-warning" href="{{ url('suratkeluar/chktrkt',$data->id) }}">Terima</a>
                             <a class="btn btn-warning" href="{{ url('suratkeluar/chktlkt',$data->id) }}">Tolak</a></td>
                         @elseif($data->stat_prof == 'ditolak')
@@ -57,9 +60,11 @@
                         <td>{{$data->stat_tu}}</td>
                         <td>{{$data->stat_prof}}</td>
                     @endif
+                        <td><a class="btn btn-primary" href="{{ url('surat/preview',$data->id) }}"><i class="nav-icon fas fa-eye"></i></a></td>
                 </tr>
                 @endforeach
             </table>
+            {{$suratkeluar->links('pagination::bootstrap-4')}}
         </div>
     </div>
 </div>

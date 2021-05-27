@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\SuratKeluar;
+use App\Models\SuratMasuk;
 
 class User extends Authenticatable
 {
@@ -19,6 +20,9 @@ class User extends Authenticatable
      */
     public function SuratKeluar(){
         return $this->belongsTo(SuratKeluar::class, 'id');
+    }
+    public function SuratMasuk(){
+        return $this->belongsTo(SuratMasuk::class, 'id');
     }
     protected $fillable = [
         'username',
@@ -45,4 +49,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 }

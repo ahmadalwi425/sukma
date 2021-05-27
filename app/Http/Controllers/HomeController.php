@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
+use App\Models\SuratKeluar;
+use App\Models\SuratMasuk;
+use App\Models\nomor;
 
 class HomeController extends Controller
 {
@@ -24,7 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userid = Auth::user()->id;
+        $suratkeluar = SuratKeluar::with('kategori','userterima','userkirim')
+            ->where(['id_tujuan'=>$userid,
+                    'stat_tu'=>'diterima',
+                    'stat_prof'=>'diterima'])->paginate(5);
+        return view('home', ['suratkeluar' => $suratkeluar]);
     }
     public function tesadmin()
     {

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Kategori;
 use App\Models\User;
+use App\Models\nomor;
+use App\Models\SuratMasuk;
 
 class SuratKeluar extends Model
 {
@@ -33,5 +35,11 @@ class SuratKeluar extends Model
     }
     public function userkirim(){
         return $this->belongsTo(User::class, 'id_pengirim');
+    }
+    public function nomor(){
+        return $this->hasOne(nomor::class, 'id');
+    }
+    public function suratmasuk(){
+        return $this->hasOne(SuratMasuk::class, 'id');
     }
 }
