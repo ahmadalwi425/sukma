@@ -28,6 +28,9 @@
                     <td>{{$data->stat_prof}}</td>
                     @if($data->stat_prof == "diterima")
                     <td><a class="btn btn-info" disabled>Surat Telah Diterima</a></td>
+                    @elseif($data->stat_prof == "ditolak" || $data->stat_tu == "ditolak")
+                    <td><a class="btn btn-primary" href="{{ url('surat/edit',$data->id) }}">Edit</a>
+                    <button class="btn btn-danger" href="{{ url('surat/destroy',$data->id) }}">Delete</button></td>
                     @else
                     <td><a class="btn btn-primary" href="{{ url('surat/edit',$data->id) }}">Edit</a>
                     <button class="btn btn-danger" href="{{ url('surat/destroy',$data->id) }}">Delete</button></td>
