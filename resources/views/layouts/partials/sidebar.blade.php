@@ -33,7 +33,26 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">MAIN MENU</li>
-          @if(Auth::user()->id_level==1 || Auth::user()->id_level==2)
+          
+          @if(Auth::user()->id_level==1 || Auth::user()->id_level==2 || Auth::user()->id_level==3)
+          <li class="nav-item">
+            <a href="{{ url('user/index') }}" class="nav-link">
+              <i class="nav-icon fas fa-user-alt"></i>
+              <p>User</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('kategori/index') }}" class="nav-link">
+              <i class="nav-icon fas fa-archive"></i>
+              <p>Kategori</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('kabag/index') }}" class="nav-link">
+              <i class="nav-icon fas fa-id-card"></i>
+              <p>Kabag</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('suratkeluar.index') }}" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
@@ -59,13 +78,8 @@
               <p>Suratku</p>
             </a>
           </li>
-          <li class="nav-header">REPORT MENU</li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>USER REPORT</p>
-            </a>
-          </li>
+          
+          
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -118,12 +132,7 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>Level 1</p>
-            </a>
-          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

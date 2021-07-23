@@ -10,6 +10,8 @@ class Kategori extends Model
 {
     use HasFactory;
     protected $table = 'kategori';
+    protected $guarded = [];
+    public $timestamps = false;
     public function SuratKeluar(){
         return $this->hasMany(SuratKeluar::class);
     }

@@ -8,6 +8,7 @@ use App\Models\SuratMasuk;
 use App\Models\nomor;
 use App\Models\Kategori;
 use App\Models\User;
+use Carbon\Carbon;
 use Auth;
 use PDF;
 
@@ -121,6 +122,7 @@ class SuratKeluarController extends Controller
     {
         $data = SuratKeluar::find($id);
         $data->stat_tu = 'ditolak';
+        $data->stat_prof = 'ditolak';
         $data->save();
         return redirect()->route('suratkeluar.index');
     }
@@ -150,9 +152,45 @@ class SuratKeluarController extends Controller
     }
     public function preview($id)
     {
+        
         $suratkeluar = nomor::with('suratkeluar')->where('id_surat',$id)->first();
+        $month = Carbon::now()->format('m');
+        if($month == "01"){
+            $month = "I";
+        }else if($month == "02"){
+            $month = "II";
+        }else if($month == "03"){
+            $month = "III";
+        }else if($month == "04"){
+            $month = "IV";
+        }else if($month == "05"){
+            $month = "V";
+        }else if($month == "06"){
+            $month = "VI";
+        }else if($month == "07"){
+            $month = "VII";
+        }else if($month == "08"){
+            $month = "VIII";
+        }else if($month == "09"){
+            $month = "IX";
+        }else if($month == "10"){
+            $month = "X";
+        }else if($month == "11"){
+            $month = "XI";
+        }else if($month == "12"){
+            $month = "XII";
+        }
+        $years = Carbon::now()->format('Y');
+        if($suratkeluar == null){
+            $suratkeluar = SuratKeluar::where('id',$id)->first();
+            $message = "sk";
+            return view('surat.preview', compact('suratkeluar','month','years','message'));
+        }else{
+            $message = "nm";
+            return view('surat.preview', compact('suratkeluar','month','years','message'));
+        }
         // $paginate = Student::orderBy('id_student', 'asc');
-        return view('surat.preview', ['suratkeluar' => $suratkeluar]);
+        
     }
 
     public function print($id)
