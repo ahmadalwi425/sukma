@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SuratKeluar;
 
-class Kategori extends Model
+class kategori extends Model
 {
     use HasFactory;
     protected $table = 'kategori';
